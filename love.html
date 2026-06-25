@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surprise</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Prompt', sans-serif;
+        }
+        
+        html,
+        body {
+            height: 100%;
+        }
+        
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            overflow: hidden;
+            position: relative;
+        }
+        /* ---------- page sections ---------- */
+        
+        .page {
+            display: none;
+            width: 100%;
+            height: 100%;
+            min-height: 100vh;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn .5s ease;
+        }
+        
+        .page.active {
+            display: flex;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        /* ---------- page 1 : gift box ---------- */
+        
+        #page1 {
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+        }
+        
+        .card {
+            background: white;
+            padding: 40px 35px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .2);
+            max-width: 90%;
+        }
+        
+        .card h1 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: #444;
+        }
+        
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 10px;
+            background: #ff4d6d;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+            font-family: 'Prompt', sans-serif;
+            transition: .25s;
+            box-shadow: 0 5px 15px rgba(255, 77, 109, .3);
+        }
+        
+        .btn:hover {
+            transform: scale(1.05);
+        }
+        
+        #message {
+            display: none;
+            margin-top: 20px;
+            font-size: 22px;
+            color: #ff4d6d;
+            font-weight: 600;
+        }
+        
+        #message .btn {
+            margin-top: 25px;
+            display: inline-block;
+        }
+        /* ---------- page 2 : password ---------- */
+        
+        #page2 {
+            background: #fff;
+        }
+        
+        .card2 {
+            width: 800px;
+            max-width: 90%;
+            background: #ff6b9d;
+            padding: 40px 30px;
+            border-radius: 35px;
+            text-align: center;
+            color: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .15);
+        }
+        
+        .card2 h1 {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+        
+        .hint {
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .code-box {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        
+        .code-box input {
+            width: 60px;
+            height: 70px;
+            border: none;
+            border-radius: 16px;
+            text-align: center;
+            font-size: 32px;
+            outline: none;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, .15);
+            font-family: 'Prompt', sans-serif;
+        }
+        
+        .error {
+            margin-top: 18px;
+            font-size: 18px;
+            color: #fff;
+            display: none;
+        }
+        
+        .confirm-btn {
+            margin-top: 28px;
+            padding: 14px 55px;
+            border: none;
+            border-radius: 50px;
+            background: white;
+            color: #ff6b9d;
+            font-size: 24px;
+            cursor: pointer;
+            font-family: 'Prompt', sans-serif;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, .15);
+            transition: .25s;
+        }
+        
+        .confirm-btn:hover {
+            transform: scale(1.05);
+        }
+        /* ---------- page 3 : flower ---------- */
+        
+        #page3 {
+            background: linear-gradient(135deg, #fff7fa, #ffe8f0, #fff7fa);
+        }
+        
+        .container3 {
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .container3 h1 {
+            font-size: 54px;
+            color: #ff7ca8;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 0 #555, -1px -1px 0 #555;
+        }
+        
+        .flower-wrap {
+            margin-bottom: 25px;
+        }
+        
+        .flower-svg {
+            width: 220px;
+            transition: .4s;
+            filter: drop-shadow(0 8px 16px rgba(255, 107, 157, .35));
+        }
+        
+        .flower-svg:hover {
+            transform: scale(1.07) rotate(-2deg);
+        }
+        
+        .text3 {
+            color: #666;
+            font-size: 22px;
+            margin-bottom: 25px;
+        }
+        
+        .flower-btn {
+            border: none;
+            background: #ff6b9d;
+            color: white;
+            padding: 14px 40px;
+            border-radius: 50px;
+            font-size: 20px;
+            cursor: pointer;
+            font-family: 'Prompt', sans-serif;
+            box-shadow: 0 5px 15px rgba(255, 105, 150, .3);
+            transition: .25s;
+        }
+        
+        .flower-btn:hover {
+            transform: scale(1.05);
+        }
+        /* ---------- page 4 : the end ---------- */
+        
+        #page4 {
+            background: linear-gradient(135deg, #ffafbd, #ffc3a0);
+        }
+        
+        .container4 {
+            text-align: center;
+            color: #fff;
+            padding: 20px;
+        }
+        
+        .container4 h1 {
+            font-size: 46px;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 0 rgba(0, 0, 0, .15);
+        }
+        
+        .container4 p {
+            font-size: 20px;
+            opacity: .95;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ===== PAGE 1 : GIFT BOX ===== -->
+    <section class="page active" id="page1">
+        <div class="card">
+            <h1>🎁 มีอะไรให้เปิดดู</h1>
+
+            <button class="btn" id="openGiftBtn">เปิดเลย</button>
+
+            <div id="message">
+                ❤️ ขอบคุณที่อยู่ด้วยกันนะ ❤️
+                <div>
+                    <button class="btn" id="toPage2Btn">ไปต่อ</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PAGE 2 : PASSWORD ===== -->
+    <section class="page" id="page2">
+        <div class="card2">
+            <h1>กรอกรหัสผ่าน</h1>
+
+            <div class="hint">คำใบ้ : รหัสผ่านคือ 123456</div>
+
+            <div class="code-box">
+                <input maxlength="1" class="code" inputmode="numeric">
+                <input maxlength="1" class="code" inputmode="numeric">
+                <input maxlength="1" class="code" inputmode="numeric">
+                <input maxlength="1" class="code" inputmode="numeric">
+                <input maxlength="1" class="code" inputmode="numeric">
+                <input maxlength="1" class="code" inputmode="numeric">
+            </div>
+
+            <div class="error" id="error">รหัสไม่ถูกต้อง</div>
+
+            <button class="confirm-btn" id="checkPasswordBtn">ยืนยัน</button>
+        </div>
+    </section>
+
+    <!-- ===== PAGE 3 : FLOWER ===== -->
+    <section class="page" id="page3">
+        <div class="container3">
+            <h1>รับดอกไม้ !</h1>
+
+            <div class="flower-wrap">
+                <svg class="flower-svg" viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg">
+                <line x1="100" y1="140" x2="100" y2="230" stroke="#4caf6d" stroke-width="6" stroke-linecap="round"/>
+                <path d="M100 175 C 80 185, 65 175, 60 190 C 80 195, 95 188, 100 175 Z" fill="#4caf6d"/>
+                <path d="M100 200 C 120 210, 135 200, 140 215 C 120 220, 105 213, 100 200 Z" fill="#5cba7d"/>
+                <g transform="translate(100,90)">
+                    <ellipse cx="0" cy="-38" rx="22" ry="42" fill="#ff6b9d"/>
+                    <ellipse cx="0" cy="38" rx="22" ry="42" fill="#ff6b9d"/>
+                    <ellipse cx="-38" cy="0" rx="42" ry="22" fill="#ff84ad"/>
+                    <ellipse cx="38" cy="0" rx="42" ry="22" fill="#ff84ad"/>
+                    <ellipse cx="0" cy="0" rx="26" ry="26" fill="#ffa6c4"/>
+                </g>
+            </svg>
+            </div>
+
+            <div class="text3">เก่งมาก ! ดอกไม้สำหรับคนน่ารัก</div>
+
+            <button class="flower-btn" id="toPage4Btn">รับดอกไม้</button>
+        </div>
+    </section>
+
+    <!-- ===== PAGE 4 : END ===== -->
+    <section class="page" id="page4">
+        <div class="container4">
+            <h1>🌷 ส่งดอกไม้ให้แล้วนะ 🌷</h1>
+            <p>จบละนะ....ไม่คุยด้วยละ</p>
+        </div>
+    </section>
+
+    <script>
+        function goTo(pageId) {
+            document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+            document.getElementById(pageId).classList.add("active");
+        }
+
+        /* page 1 : gift box */
+        document.getElementById("openGiftBtn").addEventListener("click", () => {
+            document.getElementById("message").style.display = "block";
+            document.getElementById("openGiftBtn").style.display = "none";
+        });
+
+        document.getElementById("toPage2Btn").addEventListener("click", () => {
+            goTo("page2");
+        });
+
+        /* page 2 : password */
+        const inputs = document.querySelectorAll(".code");
+
+        inputs.forEach((input, index) => {
+            input.addEventListener("input", () => {
+                if (input.value.length === 1 && index < inputs.length - 1) {
+                    inputs[index + 1].focus();
+                }
+            });
+
+            input.addEventListener("keydown", (e) => {
+                if (e.key === "Backspace" && input.value === "" && index > 0) {
+                    inputs[index - 1].focus();
+                }
+            });
+        });
+
+        document.getElementById("checkPasswordBtn").addEventListener("click", () => {
+            let password = "";
+            inputs.forEach(input => password += input.value);
+
+            if (password === "123456") {
+                document.getElementById("error").style.display = "none";
+                goTo("page3");
+            } else {
+                document.getElementById("error").style.display = "block";
+            }
+        });
+
+        /* page 3 : flower */
+        document.getElementById("toPage4Btn").addEventListener("click", () => {
+            goTo("page4");
+        });
+    </script>
+
+</body>
+
+</html>
